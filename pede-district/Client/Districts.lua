@@ -80,8 +80,8 @@ function ESXZone(zone, isPointInside)
     Citizen.Wait(150)
         Citizen.Wait(0)
         if ESX.PlayerData.job.name == Config.PoliceJobName then
-            if isPointInside then
             if Config.NotificationType == "ox" then
+             if isPointInside then
               OxNotify(Config.NotifyTitle, Config.TextJoin.. zone.name ..Config.Text2Join)
             else
               OxNotify(Config.NotifyTitle, Config.TextLeave.. zone.name ..Config.Text2Leave)
