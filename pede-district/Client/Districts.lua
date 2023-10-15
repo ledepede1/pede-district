@@ -72,24 +72,26 @@ function QBZone(zone, isPointInside)
 end
 
 function ESXZone(zone, isPointInside)
-if IsPedInAnyVehicle(PlayerPedId(), false) then
-  zone.name = zone.name
-  TriggerServerEvent("fetchPlayerSettings")
-  Citizen.Wait(150)
-  if IsEnabled == false then return end
-  Citizen.Wait(150)
-      Citizen.Wait(0)
-      if ESX.PlayerData.job.name == Config.PoliceJobName then
-          if isPointInside then
-            OxNotify(Config.NotifyTitle, Config.TextJoin.. zone.name ..Config.Text2Join)
-          else
-            OxNotify(Config.NotifyTitle, Config.TextLeave.. zone.name ..Config.Text2Leave)
-          end
-              else if Config.NotificationType == "gta5" then
-                if isPointInside then
-                Gta5Notify(Config.TextJoin.. zone.name ..Config.Text2Join)
-                else
-                  Gta5Notify(Config.TextLeave.. zone.name ..Config.Text2Leave)
+  if IsPedInAnyVehicle(PlayerPedId(), false) then
+    zone.name = zone.name
+    TriggerServerEvent("fetchPlayerSettings")
+    Citizen.Wait(150)
+    if IsEnabled == false then return end
+    Citizen.Wait(150)
+        Citizen.Wait(0)
+        if ESX.PlayerData.job.name == Config.PoliceJobName then
+            if isPointInside then
+            if Config.NotificationType == "ox" then
+              OxNotify(Config.NotifyTitle, Config.TextJoin.. zone.name ..Config.Text2Join)
+            else
+              OxNotify(Config.NotifyTitle, Config.TextLeave.. zone.name ..Config.Text2Leave)
+            end
+                else if Config.NotificationType == "gta5" then
+                  if isPointInside then
+                  Gta5Notify(Config.TextJoin.. zone.name ..Config.Text2Join)
+                  else
+                    Gta5Notify(Config.TextLeave.. zone.name ..Config.Text2Leave)
+                    end
                   end
                 end
               end
