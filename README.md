@@ -3,10 +3,11 @@
 <p>Ikke testet fuldstændig igennem endnu så kan godt forekomme fejl!</p>
 
 ## **Dependencies:**
-*ESX eller QB*
-[ox_lib](<https://github.com/overextended/ox_lib>)
-[oxmysql](<https://github.com/overextended/oxmysql>)
-[PolyZone](<https://github.com/mkafrin/PolyZone>)
+<p>ESX-Legacy eller QBCore</p>
+<p>ox_lib (context-menu) og hvis du vil bruge OX Notify ellers så bare sæt Config.NotificationType til "gta5"</p>
+<p>Der komme flere notifys i fremtiden til dem som ønsker det</p>
+<p>oxmysql</p>
+<p>PolyZone</p>
 
 ### **Features**
 <p>Mulighed for at den enkelte spiller kan slå distrikt notifikationer fra</p>
