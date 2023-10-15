@@ -1,7 +1,6 @@
 # Pede-District
 <p>Et politi distrikt script lavet til FiveM!</p>
 <p>Ikke testet fuldstændig igennem endnu så kan godt forekomme fejl!</p>
-<p>Kører bedst på QBCore iforhold til ms!</p>
 
 ## **Dependencies:**
 <p>ESX-Legacy eller QBCore</p>
