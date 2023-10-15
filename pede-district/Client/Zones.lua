@@ -63,7 +63,6 @@ local WestDistrict = PolyZone:Create({
     gridDivisions=25
   })
 
-  if IsPedInAnyVehicle(PlayerPedId(), false) then
     local combo = ComboZone:Create({NorthDistrict, SouthDistrict, EastDistrict, WestDistrict}, {name="comboDistrictZone", debugPoly=false})
       combo:onPlayerInOut(function(isPointInside, point, zone)
           if Config.Framework == "QBCORE" then
@@ -73,5 +72,4 @@ local WestDistrict = PolyZone:Create({
           end
         end
       end)
-    end
 
