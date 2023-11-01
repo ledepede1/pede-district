@@ -1,10 +1,7 @@
---[[
+IsDispatchEnabled = nil
+IsOxEnabled = nil
 
-Todo: Gøre så at spilleren selv kan vælge hvilket notify system han/hun vil bruge!
-
-]]--
-
-
+-- Framework shit
 if Config.Framework == "QBCORE" then
     QBCore = exports['qb-core']:GetCoreObject()
     
@@ -41,20 +38,24 @@ if Config.Framework == "QBCORE" then
       end
     end
 
-
-IsEnabled = false
-
 -- Changes the global variable to wether the client wants notifys or not
 RegisterNetEvent("ReturnToClient")
-AddEventHandler("ReturnToClient", function(val)
-    if val == 1 then
-    IsEnabled = true
-    else
-        IsEnabled = false
-    end
+AddEventHandler("ReturnToClient", function(val1, val2)
+        if val1 == 1 then
+            IsDispatchEnabled = true
+            else
+            IsDispatchEnabled = false
+        end
+            if val2 == 1 then
+            IsOxEnabled = true
+            else
+            IsOxEnabled = false
+        end
+    Wait(10)
 end)
 
-RegisterCommand(Config.CommandName, function(source, args, rawCommand)
+-- Creating the settings command
+RegisterCommand(Config.CommandName, function()
     if Config.Framework == "QBCORE" then
         QBCore.Functions.GetPlayerData(function(PlayerData)
           Citizen.Wait(0)
@@ -68,45 +69,24 @@ RegisterCommand(Config.CommandName, function(source, args, rawCommand)
         if ESX.PlayerData.job.name == Config.PoliceJobName then
             TriggerServerEvent("fetchPlayerSettings")
             OpenSettingsMenu()
+            end
         end
     end
-end
 end, false)
 
-
---function GetPlayerSettings(val)
---    Citizen.Wait(10)
---    return val
---end
-
+-- Open settings menu func.
 function OpenSettingsMenu()
-    lib.registerContext({
-        id = 'district_settings',
-        title = Config.MenuTitle,
-        options = {
-          {
-            title = Config.MenuButton,
-            description = Config.MenuButtonDescription,
-            icon = Config.MenuButtonIcon,
-            onSelect = function()
-                local input = lib.inputDialog(Config.MenuButtonDialogTitle , {
-                {type = 'checkbox', label = Config.MenuButtonDialogLabel, checked = IsEnabled},
-                })
-                if not input then return end
-                if input[1] == true then
-                    TriggerServerEvent("savePlayerSettings", 1)
-                else if input[1] == false then
-                    TriggerServerEvent("savePlayerSettings", 0) 
-                    end
-                end
-            end,
-          },
-        }
-    })
-    lib.showContext('district_settings')
-end
+    while IsDispatchEnabled == nil and IsOxEnabled == nil do
+        Citizen.Wait(10) -- Wait for users data to be fully fetched
+    end
 
--- Debug command
---RegisterCommand("testsql", function (source, args, rawCommand)
---    TriggerServerEvent("playerSpawn:Pede")
---end, false)
+    local input = lib.inputDialog(Config.MenuButtonDialogTitle , {
+        {type = 'checkbox', label = Config.MenuButtonDialogLabel, checked = IsDispatchEnabled},
+        {type = 'checkbox', label = Config.OxEnabledLabel, checked = IsOxEnabled},
+    })
+    
+    if not input then return end
+    TriggerServerEvent("savePlayerSettings", input[1], input[2])
+    IsDispatchEnabled = nil
+    IsOxEnabled = nil
+end

@@ -1,19 +1,16 @@
---[[
-
-Todo: Gøre så at spilleren selv kan vælge hvilket notify system han/hun vil bruge!
-
-]]--
+-- Really empty main.lua haha
 
 function Gta5Notify(message) 
   AddTextEntry("CH_ALERT", message);
   BeginTextCommandDisplayHelp("CH_ALERT");
-  EndTextCommandDisplayHelp(0, false, false, -60);
+  EndTextCommandDisplayHelp(0, false, true, -60);
 end
 
-function OxNotify(NotifyTitle, Text)
+function OxNotify(NotifyTitle, Text, type)
   lib.notify({
     title = NotifyTitle,
     description =  Text,
-    type = 'inform'
+    type = type
   })
 end
+

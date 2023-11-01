@@ -5,13 +5,14 @@
 
 ## **Dependencies:**
 <p>ESX-Legacy eller QBCore</p>
-<p>ox_lib (context-menu) og hvis du vil bruge OX Notify ellers så bare sæt Config.NotificationType til "gta5"</p>
+<p>ox_lib</p>
 <p>Der komme flere notifys i fremtiden til dem som ønsker det</p>
 <p>oxmysql</p>
 <p>PolyZone</p>
 
 ### **Features**
 <p>Mulighed for at den enkelte spiller kan slå distrikt notifikationer fra</p>
+<p>Mulighed for at slå ox_notify fra så den viser GTA style notifys istedet for</p>
 <p>Gemmer spillerens settings i en database så han/hun ikke behøves ændre settings efter hvert genstart/relog</p>
 <p>Sat op så man skal sidde i en bil og have politi rank for at se notifys!</p>
 

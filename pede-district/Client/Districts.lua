@@ -5,6 +5,7 @@ player when he/she enters the zone
 
 ]]--
 
+-- Framework shit
 if Config.Framework == "QBCORE" then
   QBCore = exports['qb-core']:GetCoreObject()
   
@@ -43,59 +44,64 @@ if Config.Framework == "QBCORE" then
     end
   end
 
+-- QBCore version
 function QBZone(zone, isPointInside)
-  if IsPedInAnyVehicle(PlayerPedId(), false) then
+if IsPedInAnyVehicle(PlayerPedId(), false) then
   zone.name = zone.name
-  TriggerServerEvent("fetchPlayerSettings")
-  Citizen.Wait(150)
-  if IsEnabled == false then return end
-  QBCore.Functions.GetPlayerData(function(PlayerData)
-    Citizen.Wait(0)
-    if PlayerData.job.name == Config.PoliceJobName then
-          if Config.NotificationType == "ox" then
-          if isPointInside then
-            OxNotify(Config.NotifyTitle, Config.TextJoin.. zone.name ..Config.Text2Join)
-          else
-            OxNotify(Config.NotifyTitle, Config.TextLeave.. zone.name ..Config.Text2Leave)
-        end 
-      else if Config.NotificationType == "gta5" then
-        if isPointInside then
-        Gta5Notify(Config.TextJoin.. zone.name ..Config.Text2Join)
-        else
-          Gta5Notify(Config.TextLeave.. zone.name ..Config.Text2Leave)
-              end
+
+TriggerServerEvent("fetchPlayerSettings")
+Citizen.Wait(150)
+  if IsDispatchEnabled == false then return end
+    QBCore.Functions.GetPlayerData(function(PlayerData)
+      Citizen.Wait(0)
+        if PlayerData.job.name == Config.PoliceJobName then
+          if IsOxEnabled == true then
+            if isPointInside then
+              OxNotify(Config.NotifyTitle, Config.TextJoin.. zone.name ..Config.Text2Join, Config.EnterType)
+            else
+              OxNotify(Config.NotifyTitle, Config.TextLeave.. zone.name ..Config.Text2Leave, Config.LeaveType)
+            end
+
+          else if IsOxEnabled == false then
+              if isPointInside then
+                Gta5Notify(Config.TextJoin.. "~y~" .. zone.name.. "~y~" ..Config.Text2Join)
+              else
+                Gta5Notify(Config.TextLeave..  "~y~" .. zone.name.. "~y~" ..Config.Text2Leave)
             end
           end
         end
+      end
     end)
   end
 end
 
+-- ESX version
 function ESXZone(zone, isPointInside)
-  if IsPedInAnyVehicle(PlayerPedId(), false) then
-    zone.name = zone.name
-    TriggerServerEvent("fetchPlayerSettings")
-    Citizen.Wait(150)
-    if IsEnabled == false then return end
-    Citizen.Wait(150)
-        Citizen.Wait(0)
-        if ESX.PlayerData.job.name == Config.PoliceJobName then
-            if Config.NotificationType == "ox" then
-             if isPointInside then
-              OxNotify(Config.NotifyTitle, Config.TextJoin.. zone.name ..Config.Text2Join)
-            else
-              OxNotify(Config.NotifyTitle, Config.TextLeave.. zone.name ..Config.Text2Leave)
-            end
-                else if Config.NotificationType == "gta5" then
-                  if isPointInside then
-                  Gta5Notify(Config.TextJoin.. zone.name ..Config.Text2Join)
-                  else
-                    Gta5Notify(Config.TextLeave.. zone.name ..Config.Text2Leave)
-                    end
-                  end
-                end
-              end
-            end
+if IsPedInAnyVehicle(PlayerPedId(), false) then
+  zone.name = zone.name
+
+TriggerServerEvent("fetchPlayerSettings")
+Citizen.Wait(150)
+  if IsDispatchEnabled == false then return end
+    Citizen.Wait(0)
+      if ESX.PlayerData.job.name == Config.PoliceJobName then
+        if IsOxEnabled == true then
+          if isPointInside then
+            OxNotify(Config.NotifyTitle, Config.TextJoin.. zone.name ..Config.Text2Join, Config.EnterType)
+          else
+            OxNotify(Config.NotifyTitle, Config.TextLeave.. zone.name ..Config.Text2Leave, Config.LeaveType)
           end
+
+        else if IsOxEnabled == false then
+            if isPointInside then
+              Gta5Notify(Config.TextJoin.. "~y~" .. zone.name.. "~y~" ..Config.Text2Join)
+            else
+              Gta5Notify(Config.TextLeave..  "~y~" .. zone.name.. "~y~" ..Config.Text2Leave)
+          end
+        end
+      end
+    end
+  end
+end
 
 

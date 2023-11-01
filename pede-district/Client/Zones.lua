@@ -5,6 +5,7 @@ But if you really want to then go ahead!
 
 ]]--
 
+-- Creating the north district
 local NorthDistrict = 
     PolyZone:Create({
     vector2(-2206.52, 4619.05), -- vector3(-2206.52, 4619.05, 1.02)
@@ -21,7 +22,7 @@ local NorthDistrict =
     gridDivisions=25,
   })
 
-
+-- Creating the south district
 local SouthDistrict = PolyZone:Create({
     vector2(-3745.76, 684.05), -- vector3(-3745.76, 684.05, 48.43)
     vector2(-2641.48, -4422.5), -- vector3(-2641.48, -4422.5, -0.7)
@@ -35,7 +36,7 @@ local SouthDistrict = PolyZone:Create({
     gridDivisions=25
   })
 
-
+-- Creating the east district
 local EastDistrict = PolyZone:Create({
     vector2(3865.73, 4853.73), -- vector3(3865.73, 4853.73, 11.23)
     vector2(643.49, 4429.97), -- vector3(643.49, 4429.97, 141.38)
@@ -49,7 +50,7 @@ local EastDistrict = PolyZone:Create({
     gridDivisions=25
   })
 
-
+-- Creating the west district
 local WestDistrict = PolyZone:Create({
     vector2(588.73, 553.99), -- vector3(588.73, 553.99, 144.91)
     vector2(-3754.62, 833.88), -- vector3(-3754.62, 833.88, -0.04)
@@ -63,13 +64,14 @@ local WestDistrict = PolyZone:Create({
     gridDivisions=25
   })
 
-    local combo = ComboZone:Create({NorthDistrict, SouthDistrict, EastDistrict, WestDistrict}, {name="comboDistrictZone", debugPoly=false})
-      combo:onPlayerInOut(function(isPointInside, point, zone)
-          if Config.Framework == "QBCORE" then
-            QBZone(zone, isPointInside)
-          else if Config.Framework == "ESX" then
-            ESXZone(zone, isPointInside)
-          end
+-- Combo zone for perfomance and optimization :)
+local combo = ComboZone:Create({NorthDistrict, SouthDistrict, EastDistrict, WestDistrict}, {name="comboDistrictZone", debugPoly=false})
+  combo:onPlayerInOut(function(isPointInside, point, zone)
+      if Config.Framework == "QBCORE" then
+        QBZone(zone, isPointInside)
+      else if Config.Framework == "ESX" then
+        ESXZone(zone, isPointInside)
         end
-      end)
+    end
+end)
 

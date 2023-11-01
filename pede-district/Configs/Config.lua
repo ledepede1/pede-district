@@ -5,6 +5,8 @@ Config.Framework = "ESX" -- QBCORE or ESX (testet på esx-legacy og qbcore)
 Config.PoliceJobName = "police"
 Config.CommandName = "settings" -- altså feks. /settings
 
+Config.EnablePlayerChoosenNotify = true -- om spilleren selv må vælge hvilket notify system som vil blive vist for ham/hende!
+
 -- # Settings menu #
 Config.MenuTitle = "Distrikt Indstillinger"
 Config.MenuButtonIcon = "list-ul"
@@ -13,9 +15,12 @@ Config.MenuButtonDescription = "Giver mulighed for at slå distrikt notifikation
 Config.MenuButtonDialogTitle = "Distrikt Notifikationer"
 Config.MenuButtonDialogLabel = "Notifikationer"
 
+Config.OxEnabledLabel = "Ox Notify"
+
 -- # Notifikationer #
-Config.NotificationType = "ox" -- ox or gta5
 Config.NotifyTitle = "Distrikt" -- Ignore if using gta5
+Config.EnterType = 'success'
+Config.LeaveType = 'error'
 
 -- # Tekst til notifikationer #
 
